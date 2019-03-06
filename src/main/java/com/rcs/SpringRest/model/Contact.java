@@ -1,5 +1,6 @@
-package com.rcs.model;
+package com.rcs.SpringRest.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,16 +10,15 @@ import javax.persistence.Id;
 public class Contact {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	@Column(name="name")
 	private String name;
+	@Column(name="phone")
 	private String phone;
 	
-	public Contact() {
-		super();
-	}
+	public Contact() {}
 	
 	public Contact(Long id, String name, String phone) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
