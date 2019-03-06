@@ -2,8 +2,11 @@ package com.rcs.SpringRest.controller;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,19 +17,16 @@ import com.rcs.SpringRest.repository.ContactRepository;
 @RequestMapping({"/contacts"})
 public class ContactController {
 	
-	private final ContactRepository contactRepository;
+	@Autowired
+	private ContactRepository contactRepository;
 	
-	public ContactController(ContactRepository contactRepository) {
-		this.contactRepository = contactRepository;
-	}
-
-	@GetMapping
+	@GetMapping("/all")
 	public List<Contact> findAll() {
 		return contactRepository.findAll();
 	}
 	
-//	@GetMapping
-//	public String hello() {
-//		return "relou";
-//	}
+	@PostMapping("/add")
+	public Contact add(@RequestBody Contact contact) {
+		return contactRepository.save(contact);
+	}
 }
