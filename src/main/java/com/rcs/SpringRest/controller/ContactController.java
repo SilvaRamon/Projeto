@@ -44,7 +44,7 @@ public class ContactController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> delete(@PathVariable("id") long id) {
+	public ResponseEntity<Object> delete(@PathVariable long id) {
 		return contactRepository.findById(id)
 				.map(result -> {contactRepository.deleteById(id);
 	            return ResponseEntity.ok().build();
@@ -52,13 +52,13 @@ public class ContactController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Contact> update(@PathVariable("id") long id, @RequestBody Contact contact){
+	public ResponseEntity<Contact> update(@PathVariable long id, @RequestBody Contact contact){
 		return contactRepository.findById(id)
-				.map(record -> {
-				record.setName(contact.getName());
-				record.setPhone(contact.getPhone());
-				Contact updated = contactRepository.save(record);
-				return ResponseEntity.ok().body(updated);
+				.map(result -> {
+					 result.setName(contact.getName());
+					 result.setPhone(contact.getPhone());
+					 Contact updated = contactRepository.save(result);
+					 return ResponseEntity.ok().body(updated);
         }).orElse(ResponseEntity.notFound().build());
   }
 }
